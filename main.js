@@ -258,7 +258,7 @@
     opacity: 1, stagger: .1, ease: 'none',
     scrollTrigger: { trigger: '.manifesto', start: 'top 70%', end: 'bottom 70%', scrub: true }
   });
-  gsap.fromTo('.manifesto__bg', { yPercent: -8 }, { yPercent: 8, ease: 'none', scrollTrigger: { trigger: '.manifesto', start: 'top bottom', end: 'bottom top', scrub: true } });
+  gsap.fromTo('.mi__bg', { yPercent: -5 }, { yPercent: 5, ease: 'none', scrollTrigger: { trigger: '.mi', start: 'top bottom', end: 'bottom top', scrub: true } });
 
   /* ---------- Stats ---------- */
   document.querySelectorAll('[data-count]').forEach(el => {
@@ -272,7 +272,7 @@
   gsap.utils.toArray('.stat img').forEach(img => {
     gsap.fromTo(img, { yPercent: -6 }, { yPercent: 6, ease: 'none', scrollTrigger: { trigger: img.parentElement, start: 'top bottom', end: 'bottom top', scrub: true } });
   });
-  gsap.from('.stat', { y: 60, stagger: .08, duration: 1.2, ease: 'expo.out', scrollTrigger: { trigger: '.impact', start: 'top 85%' } });
+  gsap.fromTo('.stat', { y: 60, opacity: 0 }, { y: 0, opacity: 1, stagger: .08, duration: 1.2, ease: 'expo.out', clearProps: 'transform', scrollTrigger: { trigger: '.impact', start: 'top 85%' } });
 
   /* ---------- Approach horizontal ---------- */
   const mm = gsap.matchMedia();
