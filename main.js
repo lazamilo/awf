@@ -90,11 +90,27 @@
     peek.querySelector('strong').textContent = lands[i].n;
     peek.querySelector('span').textContent = lands[i].c;
     peek.classList.add('is-on');
-    // place peek on the opposite side of the pin
-    peek.style.right = lands[i].x > 55 ? 'auto' : '0';
-    peek.style.left = lands[i].x > 55 ? '0' : 'auto';
-    peek.style.top = lands[i].y > 55 ? '4%' : '58%';
+    placePeek(i);
   }
+  let curLand = 0;
+  function placePeek(i) {
+    curLand = i;
+    const map = document.querySelector('.where__map');
+    const W = map.clientWidth, H = map.clientHeight;
+    const pw = peek.offsetWidth, ph = peek.offsetHeight;
+    const px = lands[i].x / 100 * W, py = lands[i].y / 100 * H;
+    const gap = 22;
+    // sit beside the dot: to its right (open sea) when there is room, otherwise to its left
+    const room = W + (innerWidth > 1100 ? 70 : 0); // may spill slightly into the column gap
+    const left = px + gap + pw <= room ? px + gap : Math.max(0, px - gap - pw);
+    const top = Math.max(0, Math.min(py - ph / 2, H - ph));
+    peek.style.zIndex = 3;
+    peek.style.right = 'auto';
+    peek.style.left = left + 'px';
+    peek.style.top = top + 'px';
+    peek.classList.toggle('is-right', left > px);
+  }
+  addEventListener('resize', () => placePeek(curLand));
   setLand(8);
 
   /* ---------- Donate ---------- */
